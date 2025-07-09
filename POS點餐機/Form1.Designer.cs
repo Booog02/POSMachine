@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
             label1 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             label2 = new Label();
@@ -43,17 +42,8 @@
             label7 = new Label();
             label8 = new Label();
             label9 = new Label();
+            button1 = new Button();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(872, 713);
-            button1.Name = "button1";
-            button1.Size = new Size(115, 38);
-            button1.TabIndex = 1;
-            button1.Text = "結帳";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // label1
             // 
@@ -137,7 +127,7 @@
             flowLayoutPanel5.AutoScroll = true;
             flowLayoutPanel5.Location = new Point(610, 48);
             flowLayoutPanel5.Name = "flowLayoutPanel5";
-            flowLayoutPanel5.Size = new Size(404, 267);
+            flowLayoutPanel5.Size = new Size(404, 622);
             flowLayoutPanel5.TabIndex = 5;
             // 
             // label6
@@ -208,7 +198,6 @@
         }
 
         #endregion
-        private Button button1;
         private Label label1;
         private FlowLayoutPanel flowLayoutPanel1;
         private Label label2;
@@ -223,5 +212,6 @@
         private Label label7;
         private Label label8;
         private Label label9;
+        private Button button1;
     }
 }

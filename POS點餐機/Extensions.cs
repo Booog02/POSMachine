@@ -160,9 +160,6 @@ namespace POS點餐機
                 Text = Text,
                 Width = width
             };
-
-
-
         }
 
         #endregion

@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 
@@ -8,6 +9,8 @@ namespace POS點餐機
         public Form1()
         {
             InitializeComponent();
+
+            EventCenter.ReceivedRenderPanel += RenderPanelHandler;
         }
         //動態生成
         string[] mainFoods = { "雞腿飯 $90" , "雞排飯 $95" ,
@@ -124,13 +127,20 @@ namespace POS點餐機
             Debug.WriteLine(checkBox.Text);
 
             num.Value = checkBox.Checked ? 1 : 0;
-            flowLayoutPanel5.Controls.Clear();
+           
+            MenuItem item = new MenuItem(checkBox.Text, (int)num.Value);
+            Order.AddOrder(item);
 
-            flowLayoutPanel1.UpdatePreview(flowLayoutPanel5);
-            flowLayoutPanel2.UpdatePreview(flowLayoutPanel5);
-            flowLayoutPanel3.UpdatePreview(flowLayoutPanel5);
-            flowLayoutPanel4.UpdatePreview(flowLayoutPanel5);
-            UpdateTotal();
+
+
+        }
+        private void RenderPanelHandler(object sender, RenderOrder renderOrder)
+        {
+            flowLayoutPanel5.Controls.Clear();
+            flowLayoutPanel5.Controls.Add(renderOrder.Panel);
+            label1.Text = renderOrder.TotalAmount;
+
+
         }
 
         private void NumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -140,136 +150,17 @@ namespace POS點餐機
             Debug.WriteLine(numericUpDown.Value.ToString());
 
             check.Checked = numericUpDown.Value > 0;
-            flowLayoutPanel5.Controls.Clear();
-            flowLayoutPanel1.UpdatePreview(flowLayoutPanel5);
-            flowLayoutPanel2.UpdatePreview(flowLayoutPanel5);
-            flowLayoutPanel3.UpdatePreview(flowLayoutPanel5);
-            flowLayoutPanel4.UpdatePreview(flowLayoutPanel5);
-            UpdateTotal();
+            
+            MenuItem item = new MenuItem(check.Text, (int)numericUpDown.Value);
+
+            Order.AddOrder(item);
+
+
 
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int total = 0;
-            #region 一個一個寫法
-            //if (checkBox1.Checked)
-            //{
-            //    string[] texts = checkBox1.Text.Split('$');
-            //    int price = int.Parse(texts[1]);
-            //    total += price;
-            //}
-            //if (checkBox2.Checked)
-            //{
-            //    string[] texts = checkBox2.Text.Split('$');
-            //    int price = int.Parse(texts[1]);
-            //    total += price;
-            //}
-            //if (checkBox3.Checked)
-            //{
-            //    string[] texts = checkBox3.Text.Split('$');
-            //    int price = int.Parse(texts[1]);
-            //    total += price;
-            //}
-            #endregion
-
-            //int temp = this.Controls.Count;
-
-            List<FlowLayoutPanel> panels = this.Controls.OfType<FlowLayoutPanel>().ToList();
-            #region 0618作業寫法
-            //for (int i = 0; i < panels.Count; i++)
-            //{
-            //    FlowLayoutPanel categoryPanel = panels[i];
-            //    for (int j = 0; j < categoryPanel.Controls.Count; j++)
-            //    {
-            //        FlowLayoutPanel itemPanel = (FlowLayoutPanel)categoryPanel.Controls[j];
-
-            //        CheckBox check = (CheckBox)itemPanel.Controls[0];
-
-
-            //        if (check != null && check.Checked)
-            //        {
-            //            #region 0618 擴充方法前
-            //            //string[] parts = check.Text.Split('$');
-
-            //            //int price = int.Parse(parts[1].Trim());
-
-            //            //NumericUpDown num = (NumericUpDown)check.Tag;
-            //            //int amount = (int)num.Value;
-
-            //            //total += price * amount;
-            //            #endregion
-
-            //            total += check.GetPrice() * check.GetAmount();
-
-            //        }
-            //    }
-
-            #region for (int i = 0; i < selectedBoxs.Count; i++)           
-            //for (int i = 0; i < selectedBoxs.Count; i++)
-            //{
-            //    CheckBox check = selectedBoxs[i];
-            //    if (check.Checked)
-            //    {
-            //        String[] foods = check.Text.Split("$");
-            //        int price = int.Parse(foods[1]);
-
-            //        NumericUpDown num = (NumericUpDown)check.Tag;
-            //        int amount = (int)num.Value;
-            //        total += price * amount;
-            //    }
-            //}
-            //label1.Text = total.ToString();
-            #endregion
-
-            //    label1.Text = total.ToString();
-            //}
-            #endregion
-
-            for (int i = 0; i < panels.Count; i++)
-            {
-                FlowLayoutPanel categoryPanel = panels[i];
-                if (categoryPanel.Name != "flowLayoutPanel5")
-                {
-                    total += categoryPanel.CalculateTotal();
-
-                    #region for (int i = 0; i < selectedBoxs.Count; i++)           
-                    //for (int i = 0; i < selectedBoxs.Count; i++)
-                    //{
-                    //    CheckBox check = selectedBoxs[i];
-                    //    if (check.Checked)
-                    //    {
-                    //        String[] foods = check.Text.Split("$");
-                    //        int price = int.Parse(foods[1]);
-
-                    //        NumericUpDown num = (NumericUpDown)check.Tag;
-                    //        int amount = (int)num.Value;
-                    //        total += price * amount;
-                    //    }
-                    //}
-                    //label1.Text = total.ToString();
-                    #endregion
-
-                }
-                label1.Text = total.ToString();
-            }
-        }
-
-        private void UpdateTotal()
-        {
-            int total = 0;
-            List<FlowLayoutPanel> panels = this.Controls.OfType<FlowLayoutPanel>().ToList();
-            for (int i = 0; i < panels.Count; i++)
-            {
-                FlowLayoutPanel categoryPanel = panels[i];
-                if (categoryPanel.Name != "flowLayoutPanel5")
-                {
-                    total += categoryPanel.CalculateTotal();
-                }
-                label1.Text = total.ToString();
-            }
-        }
+     
 
 
     }
