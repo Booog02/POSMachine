@@ -43,12 +43,13 @@
             label8 = new Label();
             label9 = new Label();
             button1 = new Button();
+            comboBox1 = new ComboBox();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(826, 726);
+            label1.Location = new Point(921, 696);
             label1.Name = "label1";
             label1.Size = new Size(14, 15);
             label1.TabIndex = 2;
@@ -170,11 +171,29 @@
             label9.TabIndex = 0;
             label9.Text = "小計";
             // 
+            // button1
+            // 
+            button1.Location = new Point(0, 0);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 6;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "雞腿飯買二送一", "雞排飯買三個打85折", "排骨飯搭配燙青菜120元", "豬排飯三份210元", "雞腿飯搭配燙青菜送紅茶一杯", "雞排飯買兩份搭配兩杯紅茶打95折", "飲料任選三杯40元", "飲料任選5杯打8折_用最低價", "豬排飯兩份搭配蛋花湯一份就送布丁一份紅茶一份", "全品項購買滿399打8折", "全品項不限金額打9折" });
+            comboBox1.Location = new Point(610, 696);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(271, 23);
+            comboBox1.TabIndex = 7;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1025, 763);
+            Controls.Add(comboBox1);
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(label7);
@@ -213,5 +232,6 @@
         private Label label8;
         private Label label9;
         private Button button1;
+        private ComboBox comboBox1;
     }
 }

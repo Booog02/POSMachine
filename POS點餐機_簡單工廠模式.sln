@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36109.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS點餐機", "POS點餐機\POS點餐機.csproj", "{B3190E40-1085-49A3-BD4A-1AB30BFDFEFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3190E40-1085-49A3-BD4A-1AB30BFDFEFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3190E40-1085-49A3-BD4A-1AB30BFDFEFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3190E40-1085-49A3-BD4A-1AB30BFDFEFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3190E40-1085-49A3-BD4A-1AB30BFDFEFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87C5F5B4-0EA9-46F0-8555-E6A84CAB2C84}
+	EndGlobalSection
+EndGlobal

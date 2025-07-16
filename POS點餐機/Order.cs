@@ -14,7 +14,7 @@ namespace POS點餐機
         /// 前端會傳入一包 MenuItem物件，該方法會根據品項內容自行管理(如果資料存在則調整數量，資料不存在則添加資料)
         /// </summary>
         /// <param name="menuItem"></param>
-        public static void AddOrder(MenuItem menuItem)
+        public static void AddOrder(string discountType, MenuItem menuItem)
         {
             // 根據前端傳進來的 menuItem 物件 去查找orders 的 List
             MenuItem product = orders.FirstOrDefault(x => x.Name == menuItem.Name);
@@ -38,8 +38,17 @@ namespace POS點餐機
                 }
             }
 
+            Discount.DiscountOrder(discountType, orders);
 
-            ShowPanel.Render(orders);
+
+
+
+        }
+
+
+        public static void ChangeDiscountType(string discountType)
+        {
+            Discount.DiscountOrder(discountType, orders);
 
         }
 

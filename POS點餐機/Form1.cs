@@ -18,7 +18,7 @@ namespace POS點餐機
 
         string[] sideFoods = { "燙青菜 $40", "滷肉飯 $30", "蛋花湯 $20", "滷蛋 $10" };
 
-        string[] drinks = { "紅茶 $15", "綠茶 $15", "奶茶 $20" };
+        string[] drinks = { "紅茶 $15", "綠茶 $20", "奶茶 $25" };
 
         string[] desserts = { "布丁 $35", "起司蛋糕 $40" };
 
@@ -118,6 +118,7 @@ namespace POS點餐機
             flowLayoutPanel3.AddFoodMenu(drinks, CheckBox_CheckChanged, NumericUpDown_ValueChanged);
             flowLayoutPanel4.AddFoodMenu(desserts, CheckBox_CheckChanged, NumericUpDown_ValueChanged);
 
+            comboBox1.SelectedIndex = 0;
         }
 
         private void CheckBox_CheckChanged(object sender, EventArgs e)
@@ -127,9 +128,9 @@ namespace POS點餐機
             Debug.WriteLine(checkBox.Text);
 
             num.Value = checkBox.Checked ? 1 : 0;
-           
+
             MenuItem item = new MenuItem(checkBox.Text, (int)num.Value);
-            Order.AddOrder(item);
+            Order.AddOrder(comboBox1.Text, item);
 
 
 
@@ -150,18 +151,18 @@ namespace POS點餐機
             Debug.WriteLine(numericUpDown.Value.ToString());
 
             check.Checked = numericUpDown.Value > 0;
-            
+
             MenuItem item = new MenuItem(check.Text, (int)numericUpDown.Value);
 
-            Order.AddOrder(item);
+            Order.AddOrder(comboBox1.Text, item);
 
 
 
         }
 
-
-     
-
-
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Order.ChangeDiscountType(comboBox1.Text);
+        }
     }
 }

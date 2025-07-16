@@ -29,5 +29,13 @@ namespace POS點餐機
 
         }
 
+        public MenuItem(string foodText, int price, int amount)
+        {
+            Name = foodText;
+            Price = price;
+            Amount = amount;
+
+        }
+
     }
 }
