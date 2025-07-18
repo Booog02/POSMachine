@@ -42,7 +42,6 @@
             label7 = new Label();
             label8 = new Label();
             label9 = new Label();
-            button1 = new Button();
             comboBox1 = new ComboBox();
             SuspendLayout();
             // 
@@ -171,13 +170,6 @@
             label9.TabIndex = 0;
             label9.Text = "小計";
             // 
-            // button1
-            // 
-            button1.Location = new Point(0, 0);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 6;
-            // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
@@ -208,7 +200,6 @@
             Controls.Add(label2);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(label1);
-            Controls.Add(button1);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -231,7 +222,6 @@
         private Label label7;
         private Label label8;
         private Label label9;
-        private Button button1;
         private ComboBox comboBox1;
     }
 }
