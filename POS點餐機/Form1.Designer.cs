@@ -29,20 +29,13 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            label2 = new Label();
-            flowLayoutPanel2 = new FlowLayoutPanel();
-            label3 = new Label();
-            flowLayoutPanel3 = new FlowLayoutPanel();
-            label4 = new Label();
-            flowLayoutPanel4 = new FlowLayoutPanel();
-            label5 = new Label();
             flowLayoutPanel5 = new FlowLayoutPanel();
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
             label9 = new Label();
             comboBox1 = new ComboBox();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             SuspendLayout();
             // 
             // label1
@@ -53,74 +46,6 @@
             label1.Size = new Size(14, 15);
             label1.TabIndex = 2;
             label1.Text = "0";
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Location = new Point(12, 48);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(250, 267);
-            flowLayoutPanel1.TabIndex = 3;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            label2.Location = new Point(12, 25);
-            label2.Name = "label2";
-            label2.Size = new Size(41, 20);
-            label2.TabIndex = 4;
-            label2.Text = "主餐";
-            // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.Location = new Point(326, 48);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(250, 267);
-            flowLayoutPanel2.TabIndex = 3;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            label3.Location = new Point(326, 25);
-            label3.Name = "label3";
-            label3.Size = new Size(41, 20);
-            label3.TabIndex = 4;
-            label3.Text = "附餐";
-            // 
-            // flowLayoutPanel3
-            // 
-            flowLayoutPanel3.Location = new Point(12, 403);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(250, 267);
-            flowLayoutPanel3.TabIndex = 3;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            label4.Location = new Point(12, 380);
-            label4.Name = "label4";
-            label4.Size = new Size(41, 20);
-            label4.TabIndex = 4;
-            label4.Text = "飲料";
-            // 
-            // flowLayoutPanel4
-            // 
-            flowLayoutPanel4.Location = new Point(326, 403);
-            flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(250, 267);
-            flowLayoutPanel4.TabIndex = 3;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            label5.Location = new Point(326, 380);
-            label5.Name = "label5";
-            label5.Size = new Size(41, 20);
-            label5.TabIndex = 4;
-            label5.Text = "甜點";
             // 
             // flowLayoutPanel5
             // 
@@ -180,6 +105,15 @@
             comboBox1.TabIndex = 7;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.BorderStyle = BorderStyle.FixedSingle;
+            flowLayoutPanel1.Location = new Point(30, 25);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(498, 677);
+            flowLayoutPanel1.TabIndex = 5;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -190,15 +124,8 @@
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
-            Controls.Add(flowLayoutPanel5);
-            Controls.Add(label5);
-            Controls.Add(flowLayoutPanel4);
-            Controls.Add(label4);
-            Controls.Add(flowLayoutPanel3);
-            Controls.Add(label3);
-            Controls.Add(flowLayoutPanel2);
-            Controls.Add(label2);
             Controls.Add(flowLayoutPanel1);
+            Controls.Add(flowLayoutPanel5);
             Controls.Add(label1);
             Name = "Form1";
             Text = "Form1";
@@ -209,19 +136,12 @@
 
         #endregion
         private Label label1;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Label label2;
-        private FlowLayoutPanel flowLayoutPanel2;
-        private Label label3;
-        private FlowLayoutPanel flowLayoutPanel3;
-        private Label label4;
-        private FlowLayoutPanel flowLayoutPanel4;
-        private Label label5;
         private FlowLayoutPanel flowLayoutPanel5;
         private Label label6;
         private Label label7;
         private Label label8;
         private Label label9;
         private ComboBox comboBox1;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

@@ -1,8 +1,578 @@
 {
-    "Menu":{
-
+  "Menus": [
+    {
+      "Type": "主餐",
+      "Items": [
+        { "Name": "雞腿飯", "Price": 90 },
+        { "Name": "雞排飯", "Price": 95 },
+        { "Name": "排骨飯", "Price": 85 },
+        { "Name": "豬排飯", "Price": 75 }
+      ]
     },
-    "Discount":{
-        
+    {
+      "Type": "附餐",
+      "Items": [
+        { "Name": "燙青菜", "Price": 40 },
+        { "Name": "滷肉飯", "Price": 30 },
+        { "Name": "蛋花湯", "Price": 20 },
+        { "Name": "滷蛋", "Price": 10 }
+      ]
+    },
+    {
+      "Type": "飲料",
+      "Items": [
+        { "Name": "紅茶", "Price": 30 },
+        { "Name": "綠茶", "Price": 30 },
+        { "Name": "奶茶", "Price": 35 },
+        { "Name": "烏龍茶", "Price": 35},
+        { "Name": "咖啡", "Price": 40},
+        { "Name": "芒果冰沙", "Price": 50 },
+        { "Name": "珍珠奶茶", "Price": 45 }
+      ]
+    },
+    {
+      "Type": "甜點",
+      "Items": [
+        { "Name": "布丁", "Price": 35 },
+        { "Name": "起司蛋糕", "Price": 40 },
+        { "Name": "乳酪蛋糕", "Price": 55 },
+        { "Name": "草莓蒙布朗", "Price": 45 },
+        { "Name": "焦糖鬆餅", "Price": 55 }
+      ]
     }
+  ],
+
+  "Discounts": [
+    {
+      "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+      "Name":"雞腿飯買二送一",
+      "Conditions":[
+        {
+          "BuyItem":"雞腿飯",
+          "BuyQuantity":2,
+          "Price":0
+        }
+      ],
+      "Rewards":[
+        {
+          "FreeItem":"雞腿飯",
+          "FreeQuantity":1,
+          "RewardType":"",
+          "DiscountRate": 0,
+          "PackagePrice": 0
+
+        }
+      ]
+  },
+  {
+    "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+    "Name":"雞腿飯一份搭配燙青菜一份送紅茶一杯",
+    "Conditions": [
+        {
+          "BuyItem":"雞腿飯",
+          "BuyQuantity":1,
+          "Price":0
+        },
+        {
+          "BuyItem":"燙青菜",
+          "BuyQuantity":1,
+          "Price":0
+
+        }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"紅茶",
+        "FreeQuantity":1,
+        "RewardType":"",
+        "DiscountRate": 0,
+        "PackagePrice": 0
+      }
+    ]
+  },
+  {
+    "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+    "Name":"任買三份雞腿飯或雞排飯並搭配燙青菜或滷蛋兩份就送兩杯芒果冰沙",
+    "Conditions": [
+        {
+          "BuyItem":"雞腿飯|雞排飯",
+          "BuyQuantity":3,
+          "Price":0
+        },
+        {
+          "BuyItem":"燙青菜|滷蛋",
+          "BuyQuantity":2,
+          "Price":0
+
+        }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"芒果冰沙",
+        "FreeQuantity":2,
+        "RewardType":"",
+        "DiscountRate": 0,
+        "PackagePrice": 0
+      }
+    ]
+  },
+
+  {
+    "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+    "Name":"豬排飯兩份搭配蛋花湯一份就送布丁一份紅茶一份",
+    "Conditions": [
+        {
+          "BuyItem":"豬排飯",
+          "BuyQuantity":2,
+          "Price":0
+        },
+        {
+          "BuyItem":"蛋花湯",
+          "BuyQuantity":1,
+          "Price":0
+        }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"布丁",
+        "FreeQuantity":1,
+        "RewardType":"",
+        "DiscountRate": 0,
+        "PackagePrice": 0
+      },
+      {
+        "FreeItem":"紅茶",
+        "FreeQuantity":1,
+        "RewardType":"",
+        "DiscountRate": 0,
+        "PackagePrice": 0
+      }
+    ]
+  },
+  {
+    "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+    "Name":"所有飲料任選5杯就送一杯(送最便宜品項)+布丁或乳酪蛋糕隨機一杯",
+    "Conditions": [
+        {
+          "BuyItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+          "BuyQuantity":5,
+          "Price":0
+        }
+    ],
+    "Rewards":[
+       {
+        "FreeItem":"布丁|乳酪蛋糕",
+        "FreeQuantity":1,
+        "RewardType":"free-random",
+        "DiscountRate": 0,
+        "PackagePrice": 0
+      },
+      {
+        "FreeItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+        "FreeQuantity":1,
+        "RewardType":"min",
+        "DiscountRate": 0,
+        "PackagePrice": 0
+      }
+    ]
+  },
+  {
+    "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+    "Name":"所有飲料任選5杯就兩杯(一杯茶類最貴一杯隨機品項)",
+    "Conditions": [
+        {
+          "BuyItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+          "BuyQuantity":5,
+          "Price":0
+        }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡",
+        "FreeQuantity":1,
+        "RewardType":"max",
+        "DiscountRate": 0,
+        "PackagePrice": 0
+      },
+       {
+        "FreeItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+        "FreeQuantity":1,
+        "RewardType":"random",
+        "DiscountRate": 0,
+        "PackagePrice": 0
+      }
+    ]
+  },
+  {
+    "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+    "Name":"所有飲料任選5杯就送一杯(送最貴品項)",
+    "Conditions": [
+        {
+          "BuyItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+          "BuyQuantity":5,
+          "Price":0
+        }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+        "FreeQuantity":1,
+        "RewardType":"max",
+        "DiscountRate": 0,
+        "PackagePrice": 0
+      }
+    ]
+  },
+  {
+    "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+    "Name":"所有飲料任選5杯就送一杯(隨機贈送)",
+    "Conditions": [
+        {
+          "BuyItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+          "BuyQuantity":5,
+          "Price":0
+        }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+        "FreeQuantity":1,
+        "RewardType":"random",
+        "DiscountRate": 0,
+        "PackagePrice": 0
+      }
+    ]
+  },
+  {
+    "Strategy": "POS點餐機.Strategies.ComboPercentageStrategy",
+    "Name": "雞排飯買三個搭配起司蛋糕兩塊打8折",
+    "Conditions": [
+      { 
+        "BuyItem": "雞排飯",
+        "BuyQuantity": 3,
+        "Price":0
+      },
+      { 
+        "BuyItem": "起司蛋糕",
+        "BuyQuantity": 2,
+        "Price":0
+      }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0.8,
+        "PackagePrice": 0
+
+      }
+    ]   
+  },
+  {
+    "Strategy": "POS點餐機.Strategies.ComboPercentageStrategy",
+    "Name": "飲料任選5杯打8折(用最低價)",
+    "Conditions": [
+        {
+          "BuyItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+          "BuyQuantity":5,
+          "Price":0
+        }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+        "FreeQuantity":0,
+        "RewardType":"min",
+        "DiscountRate": 0.8,
+        "PackagePrice": 0
+      }
+    ]
+   
+  },
+  {
+    "Strategy": "POS點餐機.Strategies.ComboPercentageStrategy",
+    "Name": "雞排飯或豬排飯任買兩份搭配兩杯任選飲料打9折",
+    "Conditions": [
+        {
+          "BuyItem":"雞排飯|豬排飯",
+          "BuyQuantity":2,
+          "Price":0
+        },
+        {
+          "BuyItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+          "BuyQuantity":2,
+          "Price":0
+        }
+    ],
+    "Rewards":[
+      { 
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0.9,
+        "PackagePrice": 0
+      }
+    ]
+  },
+  {
+    "Strategy": "POS點餐機.Strategies.ComboPercentageStrategy",
+    "Name": "任選主餐兩份外加附餐任選兩份打75折",
+    "Conditions": [
+        {
+          "BuyItem":"雞腿飯|雞排飯|排骨飯|豬排飯",
+          "BuyQuantity":2,
+          "Price":0
+        },
+        {
+          "BuyItem":"燙青菜|滷肉飯|蛋花湯|滷蛋",
+          "BuyQuantity":2,
+          "Price":0
+        }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0.75,        
+        "PackagePrice": 0
+      }
+    ]
+  },
+
+  {
+    "Strategy": "POS點餐機.Strategies.ComboFixedPriceStrategy",
+    "Name": "豬排飯三份210元",
+    "Conditions": [
+        {
+          "BuyItem":"豬排飯",
+          "BuyQuantity":3,
+          "Price":0
+        }        
+    ],
+    "Rewards":[
+      { 
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0,        
+        "PackagePrice": 210
+      }
+    ]
+  },
+   {
+    "Strategy": "POS點餐機.Strategies.ComboFixedPriceStrategy",
+    "Name": "任選主餐一份外加任選飲料一杯共150元",
+    "Conditions": [
+        {
+          "BuyItem":"雞腿飯|雞排飯|排骨飯|豬排飯",
+          "BuyQuantity":1,
+          "Price":0
+        },
+        {
+          "BuyItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+          "BuyQuantity":1,
+          "Price":0
+        }        
+    ],
+    "Rewards":[
+      { 
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0,        
+        "PackagePrice": 150
+      }
+    ]
+  },
+  {
+    "Strategy": "POS點餐機.Strategies.ComboFixedPriceStrategy",
+    "Name": "排骨飯一份搭配燙青菜兩份130元",
+    "Conditions": [
+        {
+          "BuyItem":"排骨飯",
+          "BuyQuantity":1,
+          "Price":0
+        },
+        {
+          "BuyItem":"燙青菜",
+          "BuyQuantity":2,
+          "Price":0
+        }        
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0,
+        "PackagePrice": 130
+      }
+    ]
+  },
+  {
+    "Strategy": "POS點餐機.Strategies.ComboFixedPriceStrategy",
+    "Name": "飲料任選三杯40元",
+    "Conditions": [
+        {
+          "BuyItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+          "BuyQuantity":3,
+          "Price":0
+        }        
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0,
+        "PackagePrice": 40
+      }
+    ]
+  },
+  {
+    "Strategy": "POS點餐機.Strategies.ComboFixedPriceStrategy",
+    "Name": "任選主餐一份加燙青菜兩份折扣30元",
+    "Conditions": [
+        {
+          "BuyItem":"雞腿飯|雞排飯|排骨飯|豬排飯",
+          "BuyQuantity":1,
+          "Price":0
+        },
+        {
+          "BuyItem":"燙青菜",
+          "BuyQuantity":2,
+          "Price":0
+        }        
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountPrice": 30,
+        "PackagePrice": 0
+      }
+    ]
+  },
+
+  {
+    "Strategy": "POS點餐機.Strategies.ComboFixedPriceStrategy",
+    "Name": "所有飲料任選均一價30元",
+    "Conditions": [
+        {
+          "BuyItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+          "BuyQuantity":1,
+          "Price":0
+        }      
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"紅茶|綠茶|奶茶|烏龍茶|咖啡|芒果冰沙|珍珠奶茶",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountPrice": 0,
+        "PackagePrice": 30
+      }
+    ]
+  },
+
+  {
+    "Strategy": "POS點餐機.Strategies.ComboFixedPriceStrategy",
+    "Name": "指定茶類飲料任選均一價25元",
+    "Conditions": [
+        {
+          "BuyItem":"紅茶|綠茶|烏龍茶",
+          "BuyQuantity":1,
+          "Price":0
+        }      
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"紅茶|綠茶|烏龍茶",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountPrice": 0,
+        "PackagePrice": 25
+      }
+    ]
+  },
+
+  {
+    "Strategy": "POS點餐機.Strategies.OrderTotalStrategy",
+    "Name": "全品項購買滿399打8折",
+    "Conditions": [
+        {
+          "BuyItem":"",
+          "BuyQuantity":0,
+          "Price":399      
+        }      
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0.8,
+        "PackagePrice": 0
+
+      }
+    ]
+  },
+  {
+    "Strategy": "POS點餐機.Strategies.OrderTotalStrategy",
+    "Name": "全品項不限金額打9折",
+    "Conditions": [ ],
+    "Rewards":[
+      {
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0.9,
+        "PackagePrice": 0
+      }
+    ]
+  },
+  {
+    "Strategy": "POS點餐機.Strategies.OrderTotalStrategy",
+    "Name": "所有主餐一律打8折",
+    "Conditions": [ 
+      {
+        "BuyItem":"雞腿飯|雞排飯|排骨飯|豬排飯",
+        "BuyQuantity":0,
+        "Price":0
+      }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0.8,
+        "PackagePrice": 0
+      }
+    ]
+  },
+  {
+    "Strategy": "POS點餐機.Strategies.OrderTotalStrategy",
+    "Name": "所有甜點滿199打85折",
+    "Conditions": [
+      {
+        "BuyItem":"布丁|起司蛋糕|乳酪蛋糕|草莓蒙布朗|焦糖鬆餅",
+        "BuyQuantity":0,
+        "Price":199
+      }
+    ],
+    "Rewards":[
+      {
+        "FreeItem":"",
+        "FreeQuantity":0,
+        "RewardType":"",
+        "DiscountRate": 0.85,
+        "PackagePrice": 0
+      }
+    ]
+  }
+  ]
 }

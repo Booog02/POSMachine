@@ -1,0 +1,163 @@
+{
+  "Menus": [
+    {
+      "Type": "主餐",
+      "Items": [
+        { "Name": "烤牛五花", "Price": 280 },
+        { "Name": "烤豬五花", "Price": 250 },
+        { "Name": "烤牛肋條", "Price": 320 },
+        { "Name": "烤雞腿肉", "Price": 240 }
+      ]
+    },
+    {
+      "Type": "附餐",
+      "Items": [
+        { "Name": "泡菜", "Price": 60 },
+        { "Name": "辣炒年糕", "Price": 120 },
+        { "Name": "石鍋拌飯", "Price": 150 },
+        { "Name": "海鮮煎餅", "Price": 180 }
+      ]
+    },
+    {
+      "Type": "飲料",
+      "Items": [
+        { "Name": "韓式米露", "Price": 80 },
+        { "Name": "雪碧", "Price": 60 },
+        { "Name": "可樂", "Price": 60 },
+        { "Name": "柚子茶", "Price": 90 },
+        { "Name": "燒酒", "Price": 150 },
+        { "Name": "瑪格利酒", "Price": 180 },
+        { "Name": "蜂蜜柚子冰沙", "Price": 100 }
+      ]
+    },
+    {
+      "Type": "甜點",
+      "Items": [
+        { "Name": "韓式麻糬", "Price": 80 },
+        { "Name": "黑糖冰花煎餅", "Price": 120 },
+        { "Name": "草莓雪冰", "Price": 160 },
+        { "Name": "抹茶雪冰", "Price": 160 },
+        { "Name": "紅豆雪冰", "Price": 150 }
+      ]
+    }
+  ],
+
+  "Discounts": [
+    {
+      "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+      "Name":"烤牛五花買二送一",
+      "Conditions":[
+        {
+          "BuyItem":"烤牛五花",
+          "BuyQuantity":2,
+          "Price":0
+        }
+      ],
+      "Rewards":[
+        {
+          "FreeItem":"烤牛五花",
+          "FreeQuantity":1,
+          "RewardType":"",
+          "DiscountRate": 0,
+          "PackagePrice": 0
+        }
+      ]
+    },
+    {
+      "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+      "Name":"烤豬五花一份搭配泡菜一份送雪碧一杯",
+      "Conditions": [
+        { "BuyItem":"烤豬五花", "BuyQuantity":1, "Price":0 },
+        { "BuyItem":"泡菜", "BuyQuantity":1, "Price":0 }
+      ],
+      "Rewards":[
+        { "FreeItem":"雪碧", "FreeQuantity":1, "RewardType":"", "DiscountRate": 0, "PackagePrice": 0 }
+      ]
+    },
+    {
+      "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+      "Name":"任買三份烤牛五花或烤牛肋條並搭配辣炒年糕或海鮮煎餅兩份就送兩瓶燒酒",
+      "Conditions": [
+        { "BuyItem":"烤牛五花|烤牛肋條", "BuyQuantity":3, "Price":0 },
+        { "BuyItem":"辣炒年糕|海鮮煎餅", "BuyQuantity":2, "Price":0 }
+      ],
+      "Rewards":[
+        { "FreeItem":"燒酒", "FreeQuantity":2, "RewardType":"", "DiscountRate": 0, "PackagePrice": 0 }
+      ]
+    },
+    {
+      "Strategy":"POS點餐機.Strategies.ComboFreeItemStrategy",
+      "Name":"烤雞腿肉兩份搭配石鍋拌飯一份就送韓式麻糬一份柚子茶一杯",
+      "Conditions": [
+        { "BuyItem":"烤雞腿肉", "BuyQuantity":2, "Price":0 },
+        { "BuyItem":"石鍋拌飯", "BuyQuantity":1, "Price":0 }
+      ],
+      "Rewards":[
+        { "FreeItem":"韓式麻糬", "FreeQuantity":1, "RewardType":"", "DiscountRate": 0, "PackagePrice": 0 },
+        { "FreeItem":"柚子茶", "FreeQuantity":1, "RewardType":"", "DiscountRate": 0, "PackagePrice": 0 }
+      ]
+    },
+    {
+      "Strategy": "POS點餐機.Strategies.ComboPercentageStrategy",
+      "Name": "烤牛肋條買三份搭配黑糖冰花煎餅兩份打8折",
+      "Conditions": [
+        { "BuyItem": "烤牛肋條", "BuyQuantity": 3, "Price":0 },
+        { "BuyItem": "黑糖冰花煎餅", "BuyQuantity": 2, "Price":0 }
+      ],
+      "Rewards":[
+        { "FreeItem":"", "FreeQuantity":0, "RewardType":"", "DiscountRate": 0.8, "PackagePrice": 0 }
+      ]   
+    },
+    {
+      "Strategy": "POS點餐機.Strategies.ComboFixedPriceStrategy",
+      "Name": "烤豬五花三份650元",
+      "Conditions": [
+        { "BuyItem":"烤豬五花", "BuyQuantity":3, "Price":0 }
+      ],
+      "Rewards":[
+        { "FreeItem":"", "FreeQuantity":0, "RewardType":"", "DiscountRate": 0, "PackagePrice": 650 }
+      ]
+    },
+    {
+      "Strategy": "POS點餐機.Strategies.ComboFixedPriceStrategy",
+      "Name": "任選主餐一份外加韓式米露一杯共300元",
+      "Conditions": [
+        { "BuyItem":"烤牛五花|烤豬五花|烤牛肋條|烤雞腿肉", "BuyQuantity":1, "Price":0 },
+        { "BuyItem":"韓式米露", "BuyQuantity":1, "Price":0 }
+      ],
+      "Rewards":[
+        { "FreeItem":"", "FreeQuantity":0, "RewardType":"", "DiscountRate": 0, "PackagePrice": 300 }
+      ]
+    },
+    {
+      "Strategy": "POS點餐機.Strategies.ComboFixedPriceStrategy",
+      "Name": "飲料任選三杯150元",
+      "Conditions": [
+        { "BuyItem":"韓式米露|雪碧|可樂|柚子茶|燒酒|瑪格利酒|蜂蜜柚子冰沙", "BuyQuantity":3, "Price":0 }
+      ],
+      "Rewards":[
+        { "FreeItem":"", "FreeQuantity":0, "RewardType":"", "DiscountRate": 0, "PackagePrice": 150 }
+      ]
+    },
+    {
+      "Strategy": "POS點餐機.Strategies.OrderTotalStrategy",
+      "Name": "全品項購買滿1500打85折",
+      "Conditions": [
+        { "BuyItem":"", "BuyQuantity":0, "Price":1500 }
+      ],
+      "Rewards":[
+        { "FreeItem":"", "FreeQuantity":0, "RewardType":"", "DiscountRate": 0.85, "PackagePrice": 0 }
+      ]
+    },
+    {
+      "Strategy": "POS點餐機.Strategies.OrderTotalStrategy",
+      "Name": "所有甜點滿500打9折",
+      "Conditions": [
+        { "BuyItem":"韓式麻糬|黑糖冰花煎餅|草莓雪冰|抹茶雪冰|紅豆雪冰", "BuyQuantity":0, "Price":500 }
+      ],
+      "Rewards":[
+        { "FreeItem":"", "FreeQuantity":0, "RewardType":"", "DiscountRate": 0.9, "PackagePrice": 0 }
+      ]
+    }
+  ]
+}

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS點餐機
+namespace POS點餐機.Models
 {
     //Model 專門放資料的地方
-    internal class RenderOrder
+    internal class RenderOrderModel
     {
         public FlowLayoutPanel Panel { get; set; }
         public string TotalAmount { get; set; }

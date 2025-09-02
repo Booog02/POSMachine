@@ -1,9 +1,21 @@
+using Newtonsoft.Json;
+using POS點餐機.Models;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Diagnostics;
+using System.Runtime.InteropServices.Marshalling;
+using static POS點餐機.Models.MenuModel;
 
 namespace POS點餐機
 {
+
+
+    public class Student
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
     public partial class Form1 : Form
     {
         public Form1()
@@ -12,114 +24,187 @@ namespace POS點餐機
 
             EventCenter.ReceivedRenderPanel += RenderPanelHandler;
         }
-        //動態生成
-        string[] mainFoods = { "雞腿飯 $90" , "雞排飯 $95" ,
-                               "排骨飯 $85" , "豬排飯 $75" };
 
-        string[] sideFoods = { "燙青菜 $40", "滷肉飯 $30", "蛋花湯 $20", "滷蛋 $10" };
-
-        string[] drinks = { "紅茶 $15", "綠茶 $20", "奶茶 $25" };
-
-        string[] desserts = { "布丁 $35", "起司蛋糕 $40" };
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            //建立checkbox
-            #region 0618擴充前寫法
-            //for (int i = 0; i < mainFoods.Length; i++)
-            //{
-            //    FlowLayoutPanel container = new FlowLayoutPanel();
-            //    container.Width = flowLayoutPanel1.Width;
-            //    container.Height = 40;
-            //    CheckBox check = new CheckBox();
-            //    check.Text = mainFoods[i];
-            //    check.Size = new Size(100, 30);
 
-            //    //數量控制器
-            //    NumericUpDown num = new NumericUpDown();
-            //    num.Value = 0;
-            //    num.Width = 80;
-            //    check.Tag = num;
+            //select:資料加工 => 一筆資料近來 一筆資料出去 資料只會因為select 加工而產生變化，不會減少原來資料筆數
+            //where:資料篩選 => 一筆資料近來 不一定一筆資料就會出去，資料會因為 where 條件式的不同而減少資料筆數
 
+            //List<int> nums = new List<int>() { 1, 2, 3, 4, 5 };
 
-            //    container.Controls.Add(check);
-            //    container.Controls.Add(num);
-
-            //    flowLayoutPanel1.Controls.Add(container);
-
-
-            //}
-
-            //for (int i = 0; i < sideFoods.Length; i++)
-            //{
-            //    FlowLayoutPanel container2 = new FlowLayoutPanel();
-            //    container2.Width = flowLayoutPanel2.Width;
-            //    container2.Height = 40;
-            //    CheckBox check = new CheckBox();
-            //    check.Text = sideFoods[i];
-            //    check.Size = new Size(100, 30);
-
-            //    NumericUpDown num = new NumericUpDown();
-            //    num.Value = 0;
-            //    num.Width = 80;
-            //    check.Tag = num;
-
-            //    container2.Controls.Add(check);
-            //    container2.Controls.Add(num);
-
-            //    flowLayoutPanel2.Controls.Add(container2);
-            //}
-
-            //for (int i = 0; i < drinks.Length; i++)
+            ////匿名類別寫法
+            //var temp = nums.Select(x =>
             //{
 
-            //    FlowLayoutPanel container3 = new FlowLayoutPanel();
-            //    container3.Width = flowLayoutPanel3.Width;
-            //    container3.Height = 40;
-            //    CheckBox check = new CheckBox();
-            //    check.Text = drinks[i];
-            //    check.Size = new Size(100, 30);
+            //    if (x % 2 == 0)
+            //        return new { Id = x * 2, Name = "StudentName" };
+            //    else
+            //        return null;
+            //}).ToList();
 
-            //    NumericUpDown num = new NumericUpDown();
-            //    num.Value = 0;
-            //    num.Width = 80;
-            //    check.Tag = num;
 
-            //    container3.Controls.Add(check);
-            //    container3.Controls.Add(num);
+            //selectMany: 資料攤平
 
-            //    flowLayoutPanel3.Controls.Add(container3);
-            //}
+            //List<List<int>> numbers = new List<List<int>> { new List<int>() { 1, 2, 3 }, new List<int>() { 4, 5, 6 }, new List<int>() { 7, 8, 9 } };
+            //List<int> nums = numbers.SelectMany(x => x).ToList();
 
-            //for (int i = 0; i < desserts.Length; i++)
-            //{
-            //    FlowLayoutPanel container4 = new FlowLayoutPanel();
-            //    container4.Width = flowLayoutPanel4.Width;
-            //    container4.Height = 40;
-            //    CheckBox check = new CheckBox();
-            //    check.Text = desserts[i];
-            //    check.Size = new Size(100, 30);
 
-            //    NumericUpDown num = new NumericUpDown();
-            //    num.Value = 0;
-            //    num.Width = 80;
-            //    check.Tag = num;
+            //GroupBy的目的是將指定的欄位的Key作為分組的依據
+            //每一個組別都會是一個List(集合)
+            //因為已經分組，所以只能使用 聚合函數進行計算 (Max,Min,Average,Sum,Count) 不能拿群組Key 以外的資料
 
-            //    container4.Controls.Add(check);
-            //    container4.Controls.Add(num);
+            //var temp = menuModel.Menus
+            //                    .GroupBy(x => x.Type)
+            //                    .Select(x => new
+            //                    {
+            //                        Type = x.Key,
+            //                        TotalPrice = x.Sum(y => y.Items.Sum(z => z.Price))
+            //                    })
+            //                    .Where(x => x.TotalPrice <= 300);
 
-            //    flowLayoutPanel4.Controls.Add(container4);
-            //}
-            #endregion
 
-            flowLayoutPanel1.AddFoodMenu(mainFoods, CheckBox_CheckChanged, NumericUpDown_ValueChanged);
-            flowLayoutPanel2.AddFoodMenu(sideFoods, CheckBox_CheckChanged, NumericUpDown_ValueChanged);
-            flowLayoutPanel3.AddFoodMenu(drinks, CheckBox_CheckChanged, NumericUpDown_ValueChanged);
-            flowLayoutPanel4.AddFoodMenu(desserts, CheckBox_CheckChanged, NumericUpDown_ValueChanged);
 
-            comboBox1.SelectedIndex = 0;
+            //var temp = menuModel.Discounts.GroupBy(x => x.Strategy)
+            //                              .Select(x => new
+            //                              {
+            //                                  Strategy = x.Key,
+            //                                  Count = x.Count(),
+
+            //                              });
+
+
+
+            RenderMenuPanels(AppDataModel.Menus);
+
+
+            comboBox1.DataSource = AppDataModel.Discounts;
+            comboBox1.DisplayMember = "Name";
+
+            Test1(x => TotalOddNum(x));
+
+
+
         }
+
+
+        private void Test1(Func<int, int> func)
+        {
+            Debug.WriteLine(func.Invoke(10));
+        }
+
+        private int TotalOddNum(int num)
+        {
+            int sum = 0;
+            for (int i = 0; i < num; i++)
+            {
+                if (i % 2 != 0)
+                    sum += i;
+            }
+
+            return sum;
+
+        }
+
+
+        private int TotalEvenNum(int num)
+        {
+            int sum = 0;
+            for (int i = 0; i < num; i++)
+            {
+                if (i % 2 == 0)
+                    sum += i;
+            }
+
+            return sum;
+
+        }
+        private int TotalNum(int num)
+        {
+            int sum = 0;
+            for (int i = 0; i < num; i++)
+            {
+                sum += i;
+            }
+
+            return sum;
+
+        }
+
+
+
+
+
+
+        private void RenderMenuPanels(MenuModel.Menu[] menus)
+        {
+
+            flowLayoutPanel1.Controls.Clear();
+
+
+
+            for (int i = 0; i < menus.Length; i++)
+            {
+                Menu menu = menus[i];
+
+
+
+
+                FlowLayoutPanel categoryPanel = new FlowLayoutPanel();
+                categoryPanel.Width = flowLayoutPanel1.Width / 2 - 20;
+                categoryPanel.Height = flowLayoutPanel1.Height / 2 - 20;
+
+                //分類餐點標籤
+                Label categoryLabel = new Label();
+                categoryLabel.AutoSize = false;
+                categoryLabel.Text = $"{menu.Type}";
+                categoryLabel.Width = categoryPanel.Width;
+                categoryLabel.Height = 30;
+
+
+                categoryPanel.Controls.Add(categoryLabel);
+
+
+
+                //餐點項目
+                for (int j = 0; j < menu.Items.Length; j++)
+                {
+                    Item item = menu.Items[j];
+                    FlowLayoutPanel rowPanel = new FlowLayoutPanel();
+
+                    rowPanel.Width = categoryPanel.Width;
+                    rowPanel.AutoSize = true;
+                    rowPanel.Padding = new Padding(0);
+                    rowPanel.Margin = new Padding(0, 3, 0, 3);
+
+                    CheckBox checkBox = new CheckBox();
+                    checkBox.Text = $"{item.Name.PadRight(5)} ${item.Price}";
+                    checkBox.Tag = item;
+                    checkBox.Width = (int)(categoryPanel.Width * 0.7);
+                    checkBox.TextAlign = ContentAlignment.MiddleLeft;
+                    checkBox.CheckedChanged += CheckBox_CheckChanged;
+
+
+                    NumericUpDown numericUpDown = new NumericUpDown();
+                    numericUpDown.Width = (int)(categoryPanel.Width * 0.2);
+                    numericUpDown.Minimum = 0;
+                    numericUpDown.Maximum = 99;
+                    numericUpDown.TextAlign = HorizontalAlignment.Center;
+                    numericUpDown.ValueChanged += NumericUpDown_ValueChanged;
+
+
+
+
+                    rowPanel.Controls.Add(checkBox);
+                    rowPanel.Controls.Add(numericUpDown);
+                    categoryPanel.Controls.Add(rowPanel);
+                }
+                flowLayoutPanel1.Controls.Add(categoryPanel);
+            }
+        }
+
 
         private void CheckBox_CheckChanged(object sender, EventArgs e)
         {
@@ -130,12 +215,12 @@ namespace POS點餐機
             num.Value = checkBox.Checked ? 1 : 0;
 
             MenuItem item = new MenuItem(checkBox.Text, (int)num.Value);
-            Order.AddOrder(comboBox1.Text, item);
+            Order.AddOrder((MenuModel.Discount)comboBox1.SelectedValue, item);
 
 
 
         }
-        private void RenderPanelHandler(object sender, RenderOrder renderOrder)
+        private void RenderPanelHandler(object sender, RenderOrderModel renderOrder)
         {
             flowLayoutPanel5.Controls.Clear();
             flowLayoutPanel5.Controls.Add(renderOrder.Panel);
@@ -154,7 +239,7 @@ namespace POS點餐機
 
             MenuItem item = new MenuItem(check.Text, (int)numericUpDown.Value);
 
-            Order.AddOrder(comboBox1.Text, item);
+            Order.AddOrder((MenuModel.Discount)comboBox1.SelectedValue, item);
 
 
 
@@ -162,7 +247,10 @@ namespace POS點餐機
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Order.ChangeDiscountType(comboBox1.Text);
+            if (comboBox1.SelectedValue is MenuModel.Discount discountType)
+            {
+                Order.ChangeDiscountType(discountType);
+            }
         }
     }
 }
