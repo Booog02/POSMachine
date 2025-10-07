@@ -1,9 +1,12 @@
-﻿using POS點餐機.Models;
+﻿using AIAgentPractice;
+using POS點餐機.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using static AIAgentPractice.AIRequest;
 
 namespace POS點餐機
 {
@@ -11,7 +14,7 @@ namespace POS點餐機
     {
 
         // public static void Render(List<MenuItem> orders,FlowLayoutPane panel5)
-        public static void Render(List<MenuItem> orders)
+        public static void Render(List<MenuItem> orders, AIResponse.Args aiResponse)
         {
             FlowLayoutPanel container = new FlowLayoutPanel()
             {
@@ -45,8 +48,13 @@ namespace POS點餐機
                 container.Controls.Add(itemContainer);
             }
 
+            RenderOrderModel renderOrder = new RenderOrderModel();
+            renderOrder.Panel = container;
+            renderOrder.TotalAmount = orders.Sum(x => x.Subtotal).ToString();
+            renderOrder.DiscountName = aiResponse?.name;
+            renderOrder.Reason = aiResponse?.reason;
             //LINQ 有很多不同的功能函數可以用來資料搜尋/計算
-            EventCenter.RenderPanel(container, orders.Sum(x => x.Subtotal).ToString());
+            EventCenter.RenderPanel(renderOrder);
 
             //int total = 0;
             //foreach(MenuItem item in orders)

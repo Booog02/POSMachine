@@ -36,12 +36,15 @@
             label9 = new Label();
             comboBox1 = new ComboBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            checkBox1 = new CheckBox();
+            label2 = new Label();
+            textBox1 = new TextBox();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(921, 696);
+            label1.Location = new Point(921, 714);
             label1.Name = "label1";
             label1.Size = new Size(14, 15);
             label1.TabIndex = 2;
@@ -99,7 +102,7 @@
             // 
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "雞腿飯買二送一", "雞排飯買三個打85折", "排骨飯搭配燙青菜120元", "豬排飯三份210元", "雞腿飯搭配燙青菜送紅茶一杯", "雞排飯買兩份搭配兩杯紅茶打95折", "飲料任選三杯40元", "飲料任選5杯打8折_用最低價", "豬排飯兩份搭配蛋花湯一份就送布丁一份紅茶一份", "全品項購買滿399打8折", "全品項不限金額打9折" });
-            comboBox1.Location = new Point(610, 696);
+            comboBox1.Location = new Point(610, 714);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(271, 23);
             comboBox1.TabIndex = 7;
@@ -114,14 +117,47 @@
             flowLayoutPanel1.Size = new Size(498, 677);
             flowLayoutPanel1.TabIndex = 5;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 136);
+            checkBox1.Location = new Point(610, 683);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(141, 24);
+            checkBox1.TabIndex = 8;
+            checkBox1.Text = "啟用AI自動推薦";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += EnableAIRecommend;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Bold);
+            label2.Location = new Point(1045, 25);
+            label2.Name = "label2";
+            label2.Size = new Size(73, 20);
+            label2.TabIndex = 0;
+            label2.Text = "折扣理由";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(1045, 56);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(249, 614);
+            textBox1.TabIndex = 9;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1025, 763);
+            ClientSize = new Size(1322, 763);
+            Controls.Add(textBox1);
+            Controls.Add(checkBox1);
             Controls.Add(comboBox1);
             Controls.Add(label9);
             Controls.Add(label8);
+            Controls.Add(label2);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(flowLayoutPanel1);
@@ -143,5 +179,8 @@
         private Label label9;
         private ComboBox comboBox1;
         private FlowLayoutPanel flowLayoutPanel1;
+        private CheckBox checkBox1;
+        private Label label2;
+        private TextBox textBox1;
     }
 }

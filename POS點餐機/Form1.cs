@@ -5,17 +5,12 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Runtime.InteropServices.Marshalling;
+using System.Threading.Tasks;
 using static POS點餐機.Models.MenuModel;
 
 namespace POS點餐機
 {
 
-
-    public class Student
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
     public partial class Form1 : Form
     {
         public Form1()
@@ -61,7 +56,7 @@ namespace POS點餐機
             //                    .Select(x => new
             //                    {
             //                        Type = x.Key,
-            //                        TotalPrice = x.Sum(y => y.Items.Sum(z => z.Price))
+            //                        TotalPrice = x.Sum(y => y.Orders.Sum(z => z.Price))
             //                    })
             //                    .Where(x => x.TotalPrice <= 300);
 
@@ -206,7 +201,23 @@ namespace POS點餐機
         }
 
 
-        private void CheckBox_CheckChanged(object sender, EventArgs e)
+
+        private void RenderPanelHandler(object sender, RenderOrderModel renderOrder)
+        {
+            flowLayoutPanel5.Controls.Clear();
+            flowLayoutPanel5.Controls.Add(renderOrder.Panel);
+            label1.Text = renderOrder.TotalAmount;
+            textBox1.Text = renderOrder.Reason;
+            if (!String.IsNullOrEmpty(renderOrder.Reason))
+            {
+                comboBox1.SelectedItem = AppDataModel.Discounts.First(x => x.Name == renderOrder.DiscountName);
+
+            }
+
+
+        }
+
+        private async void CheckBox_CheckChanged(object sender, EventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
             NumericUpDown num = (NumericUpDown)checkBox.Parent.Controls[1];
@@ -215,21 +226,14 @@ namespace POS點餐機
             num.Value = checkBox.Checked ? 1 : 0;
 
             MenuItem item = new MenuItem(checkBox.Text, (int)num.Value);
-            Order.AddOrder((MenuModel.Discount)comboBox1.SelectedValue, item);
+            OrderRequest request = new OrderRequest((MenuModel.Discount)comboBox1.SelectedValue, item, checkBox1.Checked);
+            await Order.AddOrder(request);
 
 
 
         }
-        private void RenderPanelHandler(object sender, RenderOrderModel renderOrder)
-        {
-            flowLayoutPanel5.Controls.Clear();
-            flowLayoutPanel5.Controls.Add(renderOrder.Panel);
-            label1.Text = renderOrder.TotalAmount;
 
-
-        }
-
-        private void NumericUpDown_ValueChanged(object sender, EventArgs e)
+        private async void NumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown numericUpDown = (NumericUpDown)sender;
             CheckBox check = (CheckBox)numericUpDown.Parent.Controls[0];
@@ -239,18 +243,30 @@ namespace POS點餐機
 
             MenuItem item = new MenuItem(check.Text, (int)numericUpDown.Value);
 
-            Order.AddOrder((MenuModel.Discount)comboBox1.SelectedValue, item);
+            OrderRequest request = new OrderRequest((MenuModel.Discount)comboBox1.SelectedValue, item, checkBox1.Checked);
+            await Order.AddOrder(request);
 
 
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedValue is MenuModel.Discount discountType)
+            if (comboBox1.SelectedValue is MenuModel.Discount discountType && checkBox1.Enabled == true)
             {
-                Order.ChangeDiscountType(discountType);
+                OrderRequest request = new OrderRequest(discountType);
+                await Order.ChangeDiscountType(request);
             }
+        }
+
+        private void EnableAIRecommend(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            comboBox1.Enabled = !((CheckBox)sender).Checked;
+            comboBox1.SelectedIndex = checkBox.Checked ? -1 : comboBox1.SelectedIndex;
+
+            //comboBox1.Enabled = ((CheckBox)sender).Checked ? false : true;
+
         }
     }
 }

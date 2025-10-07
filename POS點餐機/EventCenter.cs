@@ -13,13 +13,11 @@ namespace POS點餐機
 
 
 
-        public static void RenderPanel(FlowLayoutPanel panel, string total)
+        public static void RenderPanel(RenderOrderModel model)
         {
-            RenderOrderModel renderOrder = new RenderOrderModel();
-            renderOrder.Panel = panel;
-            renderOrder.TotalAmount = total;
 
-            ReceivedRenderPanel.Invoke(null, renderOrder);
+
+            ReceivedRenderPanel.Invoke(null, model);
 
         }
 

@@ -11,5 +11,7 @@ namespace POS點餐機.Models
     {
         public FlowLayoutPanel Panel { get; set; }
         public string TotalAmount { get; set; }
+        public string DiscountName { get; set; }
+        public string Reason { get; set; }
     }
 }
